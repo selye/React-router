@@ -1,3 +1,12 @@
+import { Outlet, Link } from "react-router-dom";
+import { getContacts } from "../contacts";
+
+
+export async function loader() {
+  const contacts = await getContacts();
+  return { contacts };
+}
+
 export default function Root() {
   return (
     <>
@@ -22,15 +31,18 @@ export default function Root() {
         <nav>
           <ul>
             <li>
-              <a href={`contacts/1`}>Harry Potter</a>
+              <Link to={`contacts/1`}>Harry Potter</Link>
             </li>
             <li>
-              <a href={`contacts/2`}>Ron Weasley</a>
+              <Link to={`contacts/2`}>Ron Weasley</Link>
             </li>
           </ul>
         </nav>
       </div>
-      <div id="detail"></div>
+      <div id="detail">
+        <Outlet />
+      </div>
     </>
   );
 }
+
